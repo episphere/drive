@@ -156,7 +156,7 @@ drive.setItem=(key,obj)=>{
     return localStorage.setItem(key,JSON.stringify(obj).split('').map((o,i)=>(o.charCodeAt()+lk[i])).toString())
 }
 drive.getItem=(key)=>{
-    var lk=localStorage.localKey.split('').map(ki=>parseInt(ki))
+    var lk=(localStorage.localKey=localStorage.localKey||[...Array(10000).keys()].map(_=>Math.random().toString().slice(2)).join('')).split('').map(ki=>parseInt(ki))
     if(localStorage[key]){
         return JSON.parse(localStorage[key].split(',').map(v=>parseInt(v)).map((v,i)=>String.fromCharCode(v-lk[i])).join(''))
     }else{
